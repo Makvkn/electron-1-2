@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather</title>
+</head>
+<body>
+
+<div class="container">
+
+    <input class="search highlighting" type="text" placeholder="Search...">
+
+    <div class="inner">
+        <div class="img-block"></div>
+        <div class="info-block">
+            <h1 id='temp' class="highlighting"></h1>
+            <p id='city' class="highlighting"></p>
+            <p id='update-date' class="highlighting"></p>
+            <p id='local-date' class="highlighting"></p>
+            <p id='data' class="highlighting"></p>
+        <Button onclick="shareData()">Share data</Button>
+        </div>
+    </div>
+
+
+    <script>
+const {ipcRenderer} = require('electron')
+        function shareData() {
+    ipcRenderer.send('message', 'ping')
+            ipcRenderer.on('reply-message', (event, data) => {
+                console.log('pong')
+            })
+        }
+    </script>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
